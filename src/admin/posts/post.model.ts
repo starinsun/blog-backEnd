@@ -29,6 +29,10 @@ export class Posts {
   zan: number;
   @prop()
   comment: number;
+  @prop()
+  csdn: string;
+  @prop()
+  juejin: string;
 }
 
 export const PostModel = getModelForClass(Posts);

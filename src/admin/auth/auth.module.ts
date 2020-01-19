@@ -1,7 +1,7 @@
 /*
  * @Date: 2019-12-24 16:24:54
  * @LastEditors  : Asen Wang
- * @LastEditTime : 2020-01-17 21:26:20
+ * @LastEditTime : 2020-01-17 21:56:32
  * @content: I
  */
 import { Module } from '@nestjs/common';
@@ -21,7 +21,7 @@ import { JwtStrategy } from './jwt.strategy';
     PassportModule,
     JwtModule.register({
       secret: jwtConstans.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '60000s' },
     }),
   ],
   exports: [AuthService],

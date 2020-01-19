@@ -1,7 +1,7 @@
 /*
  * @Date: 2019-10-23 14:39:00
- * @LastEditors: Asen Wang
- * @LastEditTime: 2019-12-13 18:48:57
+ * @LastEditors  : Asen Wang
+ * @LastEditTime : 2020-01-19 12:04:51
  * @content: I
  */
 import { ApiModelProperty } from '@nestjs/swagger';
@@ -53,6 +53,14 @@ class CreatePostsDto {
   @ApiModelProperty({ description: '评论数', example: 0 })
   @IsNumber()
   readonly comment: number;
+
+  @ApiModelProperty({ description: 'CSDN链接', example: 'wu' })
+  @IsString()
+  readonly csdn: string;
+
+  @ApiModelProperty({ description: '掘金链接', example: 'wu' })
+  @IsString()
+  readonly juejin: string;
 }
 
 export default CreatePostsDto;
