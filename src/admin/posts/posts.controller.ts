@@ -1,10 +1,18 @@
 /*
  * @Date: 2020-01-19 16:17:20
  * @LastEditors  : Asen Wang
- * @LastEditTime : 2020-01-19 16:38:27
+ * @LastEditTime : 2020-01-19 20:18:21
  * @content: I
  */
-import { Controller, UseGuards, Post, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  UseGuards,
+  Post,
+  Body,
+  Get,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation } from '@nestjs/swagger';
 import CreatePostsDto from './post.dto';
@@ -25,5 +33,15 @@ export class PostsController {
   @ApiOperation({ title: '得到管理文章' })
   async getAdminPosts() {
     return await PostModel.find();
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('post/:id')
+  @ApiOperation({ title: '删除文章' })
+  async deletePost(@Param('id') id: string) {
+    await PostModel.findByIdAndDelete(id);
+    return {
+      msg: 'success',
+    };
   }
 }

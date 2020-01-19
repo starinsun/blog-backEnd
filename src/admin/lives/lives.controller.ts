@@ -4,7 +4,15 @@
  * @LastEditTime : 2020-01-19 17:33:15
  * @content: I
  */
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { LivesModel } from './lives.model';
 import CreateLivesDto from './lives.dto';
@@ -25,5 +33,15 @@ export class LivesController {
   async createLife(@Body() createLivesDto: CreateLivesDto) {
     await LivesModel.create(createLivesDto);
     return { success: true };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('life/:id')
+  @ApiOperation({ title: '删除生活' })
+  async deleteLife(@Param('id') id: string) {
+    await LivesModel.findByIdAndDelete(id);
+    return {
+      msg: 'success',
+    };
   }
 }
