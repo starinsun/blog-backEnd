@@ -1,18 +1,10 @@
 /*
  * @Date: 2019-10-23 11:37:25
  * @LastEditors  : Asen Wang
- * @LastEditTime : 2020-01-19 16:50:19
+ * @LastEditTime : 2020-01-20 11:29:23
  * @content: I
  */
-import {
-  Controller,
-  Get,
-  Body,
-  Param,
-  Query,
-  UseGuards,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, Body, Param, Put } from '@nestjs/common';
 import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
 import { PostModel } from '../admin/posts/post.model';
 import CreatePostsDto from '../admin/posts/post.dto';
@@ -23,7 +15,7 @@ export class showPostsController {
   @Get()
   @ApiOperation({ title: '显示文章的列表界面' })
   async getPosts() {
-    return await PostModel.find();
+    return await PostModel.find().sort({ time: -1 });
   }
 
   @Get('post/:id')

@@ -1,4 +1,0 @@
-
-# curl -X POST http://localhost:4000/auth -d '{"username": "eswang", "password": "3333"}' -H "Content-Type: application/json"
-# curl http://localhost:4000/admin/posts
-curl -X DELETE http://localhost:4000/admin/posts/post/5e243722cce9be40946c3a55 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzk0MzYwOTAsImV4cCI6MTU3OTQ5NjA5MH0.20xBZJjBqGQV950D58G6JGv4fXWU-KVRxlFBbtT_1Ys

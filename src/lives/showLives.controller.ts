@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-01-19 10:39:52
  * @LastEditors  : Asen Wang
- * @LastEditTime : 2020-01-19 16:47:37
+ * @LastEditTime : 2020-01-20 11:38:39
  * @content: I
  */
 import { Controller, Get, Post, Body } from '@nestjs/common';
@@ -13,6 +13,6 @@ export class showLivesController {
   @Get()
   @ApiOperation({ title: '得到生活列表' })
   async getLives() {
-    return await LivesModel.find();
+    return await LivesModel.find().sort({ date: -1 });
   }
 }

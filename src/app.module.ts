@@ -6,7 +6,6 @@
  */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { showPostsController } from './posts/showPosts.controller';
 import { AuthModule } from './admin/auth/auth.module';
 import { UsersModule } from './admin/users/users.module';
@@ -23,6 +22,5 @@ import { PostsController as AdminPostsController } from './admin/posts/posts.con
     AdminPostsController,
     AdminLivesController,
   ],
-  providers: [AppService],
 })
 export class AppModule {}

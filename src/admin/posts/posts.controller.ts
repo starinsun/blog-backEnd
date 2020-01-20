@@ -12,6 +12,7 @@ import {
   Get,
   Delete,
   Param,
+  Put,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation } from '@nestjs/swagger';
@@ -32,7 +33,7 @@ export class PostsController {
   @Get()
   @ApiOperation({ title: '得到管理文章' })
   async getAdminPosts() {
-    return await PostModel.find();
+    return await PostModel.find().sort({ time: -1 });
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -42,6 +43,26 @@ export class PostsController {
     await PostModel.findByIdAndDelete(id);
     return {
       msg: 'success',
+    };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('post/:id')
+  @ApiOperation({ title: '得到管理文章' })
+  async getAdminPost(@Param('id') id: string) {
+    return await PostModel.findById(id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Put('post/:id')
+  @ApiOperation({ title: '修改文章' })
+  async changeLife(
+    @Param('id') id: string,
+    @Body() updatePostsDto: CreatePostsDto,
+  ) {
+    await PostModel.findByIdAndUpdate(id, updatePostsDto);
+    return {
+      msg: 'change success',
     };
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-01-19 16:17:13
  * @LastEditors  : Asen Wang
- * @LastEditTime : 2020-01-19 17:33:15
+ * @LastEditTime : 2020-01-19 21:32:42
  * @content: I
  */
 import {
@@ -12,6 +12,7 @@ import {
   UseGuards,
   Delete,
   Param,
+  Put,
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { LivesModel } from './lives.model';
@@ -24,7 +25,14 @@ export class LivesController {
   @Get()
   @ApiOperation({ title: '得到生活列表' })
   async getLives() {
-    return await LivesModel.find();
+    return await LivesModel.find().sort({ date: -1 });
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('life/:id')
+  @ApiOperation({ title: '得到每个生活然后修改' })
+  async getlife(@Param('id') id: string) {
+    return await LivesModel.findById(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -42,6 +50,19 @@ export class LivesController {
     await LivesModel.findByIdAndDelete(id);
     return {
       msg: 'success',
+    };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Put('life/:id')
+  @ApiOperation({ title: '修改生活' })
+  async changeLife(
+    @Param('id') id: string,
+    @Body() updateLivesDto: CreateLivesDto,
+  ) {
+    await LivesModel.findByIdAndUpdate(id, updateLivesDto);
+    return {
+      msg: 'change success',
     };
   }
 }
