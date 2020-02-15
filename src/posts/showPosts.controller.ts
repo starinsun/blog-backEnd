@@ -39,6 +39,6 @@ export class showPostsController {
   @Get('list/:tags')
   @ApiOperation({ title: '根据文章类别筛选列表' })
   async getPostListByTag(@Param('tags') tags: string) {
-    return await PostModel.find({ tags: `${tags}` });
+    return await PostModel.find({ tags: `${tags}` }).sort({ time: -1 });
   }
 }
